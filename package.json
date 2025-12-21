@@ -18,8 +18,10 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "framer-motion": "^12.23.26",
     "gsap": "^3.14.2",
+    "leaflet": "^1.9.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.11.0"
   },
   "devDependencies": {

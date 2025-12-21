@@ -21,8 +21,8 @@ const navItems = [
   { label: "Why GRFlex", href: "#why-grflex" },
   { label: "Estimator", href: "#calculator" },
   { label: "Application Guide", href: "#application-guide" },
-  { label: "Find a Supplier", href: "#find-a-supplier" },
-  { label: "Contact", href: "#contact" },
+  { label: "Find a Supplier", href: "/find-a-supplier" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -73,21 +73,90 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+
+  useEffect(() => {
+    const isHome =
+      window.location.pathname === "/" ||
+      window.location.pathname === "" ||
+      window.location.pathname === "/index.html";
+  
+    if (!isHome) return;
+  
+    const pending = sessionStorage.getItem("pending_hash_scroll");
+    const hash = pending || window.location.hash;
+  
+    if (!hash || !hash.startsWith("#")) return;
+  
+    sessionStorage.removeItem("pending_hash_scroll");
+  
+    const NAV_OFFSET = 86; // ajusta si hace falta (navbar + margen)
+  
+    let tries = 0;
+    const maxTries = 60;
+  
+    const tryScroll = () => {
+      const el = document.querySelector(hash);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  
+        // scroll manual (mejor que scrollIntoView cuando hay scroll-snap)
+        window.scrollTo({ top: Math.max(0, y), behavior: reducedMotion ? "auto" : "smooth" });
+  
+        // reintento para “ganarle” al snap del hero
+        tries += 1;
+        if (tries < 8) requestAnimationFrame(tryScroll);
+        return;
+      }
+  
+      tries += 1;
+      if (tries < maxTries) requestAnimationFrame(tryScroll);
+    };
+  
+    requestAnimationFrame(tryScroll);
+  }, [reducedMotion]);
+  
+
   const handleNav = (href) => {
     setOpen(false);
-
-    if (!href?.startsWith("#")) {
+  
+    const isHash = href?.startsWith("#");
+    const isHome =
+      window.location.pathname === "/" ||
+      window.location.pathname === "" ||
+      window.location.pathname === "/index.html";
+  
+    // Links a otras páginas (no hash)
+    if (!isHash) {
       window.location.href = href;
       return;
     }
-
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
-    } else {
-      window.location.hash = href;
+  
+    // Si NO estamos en el home: guardamos hash y navegamos al home
+    if (!isHome) {
+      sessionStorage.setItem("pending_hash_scroll", href);
+      window.location.href = `/${href}`;
+      return;
     }
+  
+    // Estamos en home: scroll directo (manual + offset)
+const el = document.querySelector(href);
+if (el) {
+  const NAV_OFFSET = 86; // mismo valor que arriba
+  const y = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  window.scrollTo({ top: Math.max(0, y), behavior: reducedMotion ? "auto" : "smooth" });
+
+  // reintento corto por si hay snap
+  requestAnimationFrame(() => {
+    const y2 = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    window.scrollTo({ top: Math.max(0, y2), behavior: "auto" });
+  });
+} else {
+  window.location.hash = href;
+}
+
   };
+  
+  
 
   return (
     <>
@@ -162,7 +231,7 @@ export default function Navbar() {
               >
                 {/* Left: logo */}
 <Box
-  onClick={() => handleNav("#top")}
+  onClick={() => handleNav("/")}
   role="button"
   tabIndex={0}
   sx={{
