@@ -125,7 +125,7 @@ export default function ApplicationGuideSection() {
                 maxWidth: { xs: "100%", md: "52ch" },
               }}
             >
-              A short, clear overview of how GRFLEX is applied on site. Built for speed and consistency.
+              Built for fast application and long-term performance.
             </Typography>
 
             {/* STEPS */}

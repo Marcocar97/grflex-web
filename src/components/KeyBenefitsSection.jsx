@@ -41,7 +41,11 @@ const KeyBenefitsSection = () => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: { xs: 2, md: 2.5 },
+
+      // Reduced gap to allow bigger icons without increasing card height
+      gap: { xs: 1.25, md: 1.5 },
+
+      // Keep card size the same
       minHeight: { xs: 180, sm: 200, md: 220 },
 
       transition: prefersReducedMotion
@@ -65,7 +69,7 @@ const KeyBenefitsSection = () => {
             position: "absolute",
             inset: -2,
             borderRadius: "inherit",
-            padding: "1px", // thickness of the animated contour
+            padding: "1px",
             background:
               "conic-gradient(from 0deg, rgba(255,106,0,0.05), rgba(255,106,0,0.55), rgba(255,106,0,0.05))",
             WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
@@ -73,7 +77,7 @@ const KeyBenefitsSection = () => {
             maskComposite: "exclude",
             opacity: inView ? 0.9 : 0,
             transition: "opacity 600ms ease",
-            animation: inView ? "grflexBorderSpin 14s linear infinite" : "none", // slower & smooth
+            animation: inView ? "grflexBorderSpin 14s linear infinite" : "none",
             pointerEvents: "none",
           },
 
@@ -102,11 +106,16 @@ const KeyBenefitsSection = () => {
     textAlign: "center",
     fontWeight: 700,
     letterSpacing: "0.2px",
-    fontSize: { xs: "1.125rem", sm: "1.125rem", md: "1.25rem" }, // 18 / 18 / 20
-    lineHeight: 1.3,
+    // Slightly smaller so the bigger icon fits without increasing card height
+    fontSize: { xs: "1rem", sm: "1.05rem", md: "1.1rem" },
+    lineHeight: 1.25,
   };
 
-  const iconBoxSx = { width: { xs: 52, sm: 56 }, height: { xs: 52, sm: 56 } };
+  // Doubled icon size (roughly), without changing card height
+  const iconBoxSx = {
+    width: { xs: 96, sm: 104, md: 110 },
+    height: { xs: 96, sm: 104, md: 110 },
+  };
 
   return (
     <Box
@@ -115,8 +124,8 @@ const KeyBenefitsSection = () => {
       component="section"
       sx={{
         bgcolor: "#000",
-        pt: { xs: 4, md: 6 }, // removed top
-        pb: { xs: 4, md: 10 },  // ⬅️ padding SOLO abajo
+        pt: { xs: 4, md: 6 },
+        pb: { xs: 4, md: 10 },
       }}
     >
       <Container maxWidth={false} disableGutters sx={{ px: { xs: 2, sm: 3, md: 6 } }}>

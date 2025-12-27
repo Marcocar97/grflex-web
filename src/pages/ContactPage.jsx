@@ -443,7 +443,6 @@ export default function ContactPage() {
               <InfoRow label="Phone" value="01948 808659" />
               <InfoRow label="Email" value="info@grflex.co.uk" />
               <InfoRow label="Hours" value="Mon–Fri, 9:00–17:00" />
-              <InfoRow label="Location" value="United Kingdom" />
             </Box>
 
             {/* Extra blocks to fill height nicely */}
@@ -454,7 +453,6 @@ export default function ContactPage() {
               <Box sx={{ display: "grid", gap: 0.9 }}>
                 <MiniLine title="Technical support" text="Roof type, photos, and brief issue summary." />
                 <MiniLine title="Sales enquiry" text="Approx. roof size and location for a quick estimate." />
-                <MiniLine title="Training" text="Preferred date and number of attendees." />
               </Box>
             </Box>
 

@@ -1,19 +1,24 @@
 // src/components/Footer.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Box, Button, Divider, Typography, useMediaQuery } from "@mui/material";
+import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
 import { motion, useReducedMotion } from "framer-motion";
 
 const ORANGE = "#ff6a00";
 
-const NAV = [
-  { label: "Why GRFlex", href: "/#why-grflex" },
-  { label: "Estimator", href: "/#calculator" },
-  { label: "Application Guide", href: "/#application-guide" },
+const DOWNLOADS = [
+  { label: "GRFlex TDS", href: "/GRFlex-TDS.pdf", fileName: "GRFlex-TDS.pdf" },
+  { label: "GRFlex MSDS", href: "/GRFlex-MSDS.pdf", fileName: "GRFlex-MSDS.pdf" },
+  { label: "Activator MSDS", href: "/GRFlex-Activator-MSDS.pdf", fileName: "GRFlex-Activator-MSDS.pdf" },
+  {
+    label: "Reinforcement Matting MSDS",
+    href: "/GRFlex-Reinforcement-Matting-MSDS.pdf",
+    fileName: "GRFlex-Reinforcement-Matting-MSDS.pdf",
+  },
 ];
 
 export default function Footer() {
   const reducedMotion = useReducedMotion();
-  const isMdUp = useMediaQuery("(min-width:900px)");
+  useMediaQuery("(min-width:900px)"); // kept (you may use later)
 
   const rootRef = useRef(null);
   const [inView, setInView] = useState(false);
@@ -38,10 +43,8 @@ export default function Footer() {
     return { initial: { y: 14, opacity: 0 }, animate: { y: 0, opacity: 1 } };
   }, [reducedMotion]);
 
-  const handleNav = (href) => {
+  const go = (href) => {
     if (!href) return;
-
-    // Always go through absolute paths so it works from any page
     window.location.href = href;
   };
 
@@ -57,21 +60,17 @@ export default function Footer() {
         borderTop: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      {/* Ambient / mist */}
+      {/* SIMPLE background (no animated layer) */}
       <Box
         sx={{
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
           background:
-            "radial-gradient(900px 520px at 18% 15%, rgba(255,106,0,0.11), rgba(0,0,0,0) 62%)," +
-            "radial-gradient(800px 620px at 78% 55%, rgba(255,255,255,0.05), rgba(0,0,0,0) 65%)," +
-            "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0) 40%)",
+            "radial-gradient(900px 520px at 18% 15%, rgba(255,106,0,0.08), rgba(0,0,0,0) 62%)," +
+            "radial-gradient(800px 620px at 78% 55%, rgba(255,255,255,0.03), rgba(0,0,0,0) 65%)",
         }}
       />
-
-      {/* Animated “fiber” lines (KEEP) */}
-      <FiberLines reducedMotion={reducedMotion} />
 
       {/* Content wrapper */}
       <Box
@@ -80,8 +79,8 @@ export default function Footer() {
           mx: "auto",
           position: "relative",
           zIndex: 2,
-          pt: { xs: 7, md: 8 },
-          pb: { xs: 3.5, md: 4.2 },
+          pt: { xs: 6, md: 7 },
+          pb: { xs: 3.2, md: 4.0 },
         }}
       >
         {/* Top grid */}
@@ -89,7 +88,7 @@ export default function Footer() {
           sx={{
             display: "grid",
             gridTemplateColumns: { xs: "1fr", md: "1.2fr 0.8fr 1fr" },
-            gap: { xs: 2.2, md: 2.6 },
+            gap: { xs: 2.0, md: 2.4 },
             alignItems: "start",
           }}
         >
@@ -110,35 +109,30 @@ export default function Footer() {
           >
             <GlowSheen reducedMotion={reducedMotion} />
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1.4 }}>
-
-              <Box sx={{ lineHeight: 1 }}>
-                <Typography sx={{ fontWeight: 950, letterSpacing: "-0.02em", fontSize: { xs: 28, md: 30 } }}>
-                  GRFlex
-                </Typography>
-                <Typography
-                  sx={{
-                    mt: 0.4,
-                    fontSize: 12,
-                    letterSpacing: "0.22em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.62)",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Fully Flexible Fibre Glass
-                </Typography>
-              </Box>
+            <Box sx={{ lineHeight: 1 }}>
+              <Typography sx={{ fontWeight: 950, letterSpacing: "-0.02em", color: ORANGE, fontSize: { xs: 28, md: 30 } }}>
+                GRFlex
+              </Typography>
+              <Typography
+                sx={{
+                  mt: 0.4,
+                  fontSize: 12,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.62)",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Fully Flexible Fibre Glass
+              </Typography>
             </Box>
 
-            <Typography sx={{ mt: 1.6, color: "rgba(255,255,255,0.70)", lineHeight: 1.8, maxWidth: 520 }}>
-              Premium PMMA waterproofing system built for speed, durability and clean detailing. If you need help
-              choosing a specification or finding a supplier, we’ll point you in the right direction.
+            <Typography sx={{ mt: 1.4, color: "rgba(255,255,255,0.70)", lineHeight: 1.8, maxWidth: 520 }}>
+              Premium GRP waterproofing system built for speed, durability and seamless detailing.
             </Typography>
-
           </Box>
 
-          {/* Nav block (Quick tip REMOVED) */}
+          {/* Documents / Downloads block */}
           <Box
             component={motion.div}
             {...(!reducedMotion ? baseEnter : {})}
@@ -151,29 +145,34 @@ export default function Footer() {
               boxShadow: "0 40px 120px rgba(0,0,0,0.65)",
             }}
           >
-            <Typography sx={{ fontWeight: 950, letterSpacing: "-0.02em", fontSize: 15.5, mb: 1.3 }}>
-              Navigation
+            <Typography sx={{ fontWeight: 950, letterSpacing: "-0.02em", color: ORANGE, fontSize: 15.5, mb: 1.3 }}>
+              Documents
             </Typography>
 
             <Box sx={{ display: "grid", gap: 0.7 }}>
-              {NAV.map((item) => (
-                <FooterLink
+              {DOWNLOADS.map((item) => (
+                <DownloadLink
                   key={item.href}
                   label={item.label}
-                  onClick={() => handleNav(item.href)}
+                  href={item.href}
+                  fileName={item.fileName}
                   reducedMotion={reducedMotion}
                 />
               ))}
             </Box>
+
+            <Typography sx={{ mt: 1.2, color: "rgba(255,255,255,0.55)", fontSize: 12.5, lineHeight: 1.6 }}>
+              PDFs will download directly from this page.
+            </Typography>
           </Box>
 
-          {/* Third column: Contact details ONLY (replaces Send a message) */}
+          {/* Contact details */}
           <Box
             component={motion.div}
             {...(!reducedMotion ? baseEnter : {})}
             transition={{ duration: reducedMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
             sx={{
-              border: "1px solid rgba(255,106,0,0.30)",
+              border: "1px solid rgba(255,106,0,0.26)",
               bgcolor: "rgba(255,255,255,0.02)",
               borderRadius: 3,
               p: { xs: 2.2, md: 2.6 },
@@ -182,20 +181,7 @@ export default function Footer() {
               overflow: "hidden",
             }}
           >
-            <Box
-              sx={{
-                position: "absolute",
-                inset: -60,
-                pointerEvents: "none",
-                background:
-                  "radial-gradient(520px 220px at 20% 18%, rgba(255,106,0,0.16), rgba(0,0,0,0) 60%)," +
-                  "radial-gradient(520px 240px at 80% 70%, rgba(255,255,255,0.05), rgba(0,0,0,0) 62%)",
-                filter: "blur(18px)",
-                opacity: 0.9,
-              }}
-            />
-
-            <Typography sx={{ position: "relative", fontWeight: 950, letterSpacing: "-0.02em", fontSize: 15.5 }}>
+            <Typography sx={{ position: "relative", fontWeight: 950, color: ORANGE, letterSpacing: "-0.02em", fontSize: 15.5 }}>
               Contact details
             </Typography>
             <Typography sx={{ position: "relative", mt: 0.8, color: "rgba(255,255,255,0.68)", lineHeight: 1.75 }}>
@@ -206,24 +192,29 @@ export default function Footer() {
               <PillLine label="Technical advice" value="01948 808659" />
               <PillLine label="Email" value="info@grflex.co.uk" />
             </Box>
+
+            <Box sx={{ mt: 1.4, display: "flex", gap: 1.0, flexWrap: "wrap" }}>
+              <MiniChip label="Where to buy" onClick={() => go("/find-a-supplier")} reducedMotion={reducedMotion} />
+              <MiniChip label="Contact" onClick={() => go("/contact")} reducedMotion={reducedMotion} />
+            </Box>
           </Box>
         </Box>
 
         {/* Bottom bar */}
-        <Box sx={{ mt: { xs: 3.0, md: 3.2 } }}>
+        <Box sx={{ mt: { xs: 2.6, md: 3.0 } }}>
           <Divider sx={{ borderColor: "rgba(255,255,255,0.10)" }} />
 
           <Box
             sx={{
-              pt: 2.0,
+              pt: 1.8,
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: { xs: "flex-start", md: "center" },
               justifyContent: "space-between",
-              gap: 1.2,
+              gap: 1.1,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1.2, flexWrap: "wrap" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1.1, flexWrap: "wrap" }}>
               <Typography sx={{ color: "rgba(255,255,255,0.55)", fontSize: 13.5 }}>
                 © {new Date().getFullYear()} GRFlex. All rights reserved.
               </Typography>
@@ -239,8 +230,8 @@ export default function Footer() {
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", gap: 1.0, flexWrap: "wrap" }}>
-              <MiniChip label="Privacy" onClick={() => handleNav("/privacy")} reducedMotion={reducedMotion} />
-              <MiniChip label="Terms" onClick={() => handleNav("/terms")} reducedMotion={reducedMotion} />
+              <MiniChip label="Privacy" onClick={() => go("/privacy")} reducedMotion={reducedMotion} />
+              <MiniChip label="Terms" onClick={() => go("/terms")} reducedMotion={reducedMotion} />
             </Box>
           </Box>
         </Box>
@@ -253,9 +244,9 @@ export default function Footer() {
           left: 0,
           right: 0,
           bottom: 0,
-          height: 120,
+          height: 110,
           pointerEvents: "none",
-          background: "linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.85))",
+          background: "linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.82))",
           opacity: 0.6,
         }}
       />
@@ -265,14 +256,23 @@ export default function Footer() {
 
 /* ----------------- Bits ----------------- */
 
-function FooterLink({ label, onClick, reducedMotion }) {
+function DownloadLink({ label, href, fileName, reducedMotion }) {
   return (
     <Box
-      component={motion.button}
-      onClick={onClick}
+      component={motion.a}
+      href={href}
+      download={fileName}
       whileHover={reducedMotion ? undefined : { x: 3 }}
       whileTap={reducedMotion ? undefined : { scale: 0.985 }}
-      style={{ width: "100%", textAlign: "left", background: "transparent", border: 0, padding: 0, cursor: "pointer" }}
+      style={{
+        width: "100%",
+        textAlign: "left",
+        background: "transparent",
+        border: 0,
+        padding: 0,
+        cursor: "pointer",
+        textDecoration: "none",
+      }}
     >
       <Box
         sx={{
@@ -287,7 +287,7 @@ function FooterLink({ label, onClick, reducedMotion }) {
           bgcolor: "rgba(255,255,255,0.015)",
           "&:hover": {
             bgcolor: "rgba(255,255,255,0.035)",
-            borderColor: "rgba(255,106,0,0.35)",
+            borderColor: "rgba(255,106,0,0.32)",
           },
         }}
       >
@@ -300,7 +300,7 @@ function FooterLink({ label, onClick, reducedMotion }) {
             width: 26,
             height: 26,
             borderRadius: 999,
-            border: "1px solid rgba(255,106,0,0.35)",
+            border: "1px solid rgba(255,106,0,0.30)",
             bgcolor: "rgba(0,0,0,0.22)",
             display: "grid",
             placeItems: "center",
@@ -311,30 +311,6 @@ function FooterLink({ label, onClick, reducedMotion }) {
         </Box>
       </Box>
     </Box>
-  );
-}
-
-function ActionPill({ text, onClick, reducedMotion }) {
-  return (
-    <Button
-      onClick={onClick}
-      component={motion.button}
-      whileHover={reducedMotion ? undefined : { scale: 1.02 }}
-      whileTap={reducedMotion ? undefined : { scale: 0.985 }}
-      variant="outlined"
-      sx={{
-        borderRadius: 999,
-        textTransform: "none",
-        px: 2.0,
-        py: 0.95,
-        color: "rgba(255,255,255,0.86)",
-        borderColor: "rgba(255,255,255,0.18)",
-        bgcolor: "rgba(255,255,255,0.02)",
-        "&:hover": { borderColor: "rgba(255,106,0,0.55)", bgcolor: "rgba(255,255,255,0.04)" },
-      }}
-    >
-      {text}
-    </Button>
   );
 }
 
@@ -368,37 +344,33 @@ function PillLine({ label, value }) {
   );
 }
 
-function MicroMeta({ left, right }) {
-  return (
-    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 1.2 }}>
-      <Typography sx={{ color: "rgba(255,255,255,0.50)", fontSize: 13.0 }}>{left}</Typography>
-      <Typography sx={{ color: "rgba(255,255,255,0.50)", fontSize: 13.0 }}>{right}</Typography>
-    </Box>
-  );
-}
-
 function MiniChip({ label, onClick, reducedMotion }) {
   return (
-    <Button
-      onClick={onClick}
+    <Box
       component={motion.button}
+      onClick={onClick}
       whileHover={reducedMotion ? undefined : { y: -1 }}
       whileTap={reducedMotion ? undefined : { scale: 0.98 }}
-      variant="text"
-      sx={{
-        textTransform: "none",
-        fontWeight: 800,
-        color: "rgba(255,255,255,0.65)",
-        px: 1.2,
-        py: 0.7,
-        borderRadius: 999,
-        border: "1px solid rgba(255,255,255,0.10)",
-        bgcolor: "rgba(255,255,255,0.02)",
-        "&:hover": { bgcolor: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.80)" },
-      }}
+      style={{ background: "transparent", border: 0, padding: 0, cursor: "pointer" }}
     >
-      {label}
-    </Button>
+      <Box
+        sx={{
+          display: "inline-flex",
+          alignItems: "center",
+          textTransform: "none",
+          fontWeight: 800,
+          color: "rgba(255,255,255,0.65)",
+          px: 1.2,
+          py: 0.7,
+          borderRadius: 999,
+          border: "1px solid rgba(255,255,255,0.10)",
+          bgcolor: "rgba(255,255,255,0.02)",
+          "&:hover": { bgcolor: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.80)" },
+        }}
+      >
+        {label}
+      </Box>
+    </Box>
   );
 }
 
@@ -446,72 +418,5 @@ function GlowSheen({ reducedMotion }) {
         opacity: 0,
       }}
     />
-  );
-}
-
-function FiberLines({ reducedMotion }) {
-  return (
-    <Box
-      sx={{
-        position: "absolute",
-        inset: 0,
-        pointerEvents: "none",
-        opacity: 0.85,
-      }}
-    >
-      <Box
-        component={motion.div}
-        animate={
-          reducedMotion
-            ? {}
-            : {
-                x: [0, 18, 0, -12, 0],
-                y: [0, -8, 0, 10, 0],
-              }
-        }
-        transition={reducedMotion ? {} : { duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        sx={{
-          position: "absolute",
-          inset: -120,
-          filter: "blur(20px)",
-          opacity: 0.8,
-          background:
-            "linear-gradient(110deg, rgba(255,106,0,0) 0%, rgba(255,106,0,0.18) 16%, rgba(255,255,255,0.06) 38%, rgba(255,106,0,0.10) 60%, rgba(255,106,0,0) 78%)",
-          maskImage: "repeating-linear-gradient(90deg, rgba(0,0,0,0) 0 10px, rgba(0,0,0,1) 10px 11px)",
-          WebkitMaskImage: "repeating-linear-gradient(90deg, rgba(0,0,0,0) 0 10px, rgba(0,0,0,1) 10px 11px)",
-        }}
-      />
-
-      <Box
-        component={motion.div}
-        animate={reducedMotion ? {} : { rotate: [0, 2.6, 0, -2.2, 0], opacity: [0.35, 0.55, 0.35] }}
-        transition={reducedMotion ? {} : { duration: 10.5, repeat: Infinity, ease: "easeInOut" }}
-        sx={{
-          position: "absolute",
-          left: "-20%",
-          right: "-20%",
-          top: "22%",
-          height: 2,
-          background: "linear-gradient(90deg, rgba(255,106,0,0), rgba(255,106,0,0.85), rgba(255,106,0,0))",
-          opacity: 0.35,
-          filter: "blur(0.2px)",
-        }}
-      />
-
-      <Box
-        component={motion.div}
-        animate={reducedMotion ? {} : { x: ["-10%", "110%"], opacity: [0, 0.55, 0] }}
-        transition={reducedMotion ? {} : { duration: 7.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 2.2 }}
-        sx={{
-          position: "absolute",
-          top: "64%",
-          width: "38%",
-          height: 1,
-          background: "linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.28), rgba(255,255,255,0))",
-          filter: "blur(0.5px)",
-          opacity: 0,
-        }}
-      />
-    </Box>
   );
 }

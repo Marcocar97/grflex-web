@@ -21,7 +21,7 @@ const navItems = [
   { label: "Why GRFlex", href: "#why-grflex" },
   { label: "Estimator", href: "#calculator" },
   { label: "Application Guide", href: "#application-guide" },
-  { label: "Find a Supplier", href: "/find-a-supplier" },
+  { label: "Where to buy", href: "/find-a-supplier" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -313,25 +313,27 @@ if (el) {
                       </NavButton>
                     ))}
 
-                    <Button
-                      onClick={() => handleNav("#get-grflex")}
-                      variant="contained"
-                      disableElevation
-                      sx={{
-                        ml: 0.6,
-                        bgcolor: ORANGE,
-                        color: "#000",
-                        fontWeight: 900,
-                        px: 2.1,
-                        py: 1.05,
-                        borderRadius: 999,
-                        textTransform: "none",
-                        boxShadow: "0 18px 36px rgba(0,0,0,0.35)",
-                        "&:hover": { bgcolor: ORANGE, filter: "brightness(1.05)" },
-                      }}
-                    >
-                      Get GRFlex
-                    </Button>
+<Button
+  component="a"
+  href="/find-a-supplier"
+  variant="contained"
+  disableElevation
+  sx={{
+    ml: 0.6,
+    bgcolor: ORANGE,
+    color: "#000",
+    fontWeight: 900,
+    px: 2.1,
+    py: 1.05,
+    borderRadius: 999,
+    textTransform: "none",
+    boxShadow: "0 18px 36px rgba(0,0,0,0.35)",
+    "&:hover": { bgcolor: ORANGE, filter: "brightness(1.05)" },
+  }}
+>
+  Get GRFlex
+</Button>
+
                   </Box>
                 ) : (
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>

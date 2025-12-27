@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
 
@@ -17,38 +17,22 @@ const useReducedMotion = () => {
 };
 
 export default function FinalCTASection() {
-  useMediaQuery("(min-width:900px)"); // kept (you may use later)
+  useMediaQuery("(min-width:900px)");
   const reducedMotion = useReducedMotion();
-
-  // Put your tin image in /public as: /grflex-tin.png
-  // If you already have a different filename, just change TIN_SRC.
-  const TIN_SRC = "/grflex-tin.png";
 
   const actions = useMemo(
     () => [
       {
         label: "Get GRFLEX",
-        href: "/contact", // change if you have a shop page
+        href: "/find-a-supplier",
         variant: "primary",
-        note: "Enquire or buy",
+        note: "Find distributor",
       },
       {
         label: "Contact",
         href: "/contact",
         variant: "secondary",
-        note: "Ask a question",
-      },
-      {
-        label: "Find distributor",
-        href: "/distributors",
-        variant: "secondary",
-        note: "Where to get it",
-      },
-      {
-        label: "Become installer",
-        href: "/become-installer",
-        variant: "secondary",
-        note: "Join the network",
+        note: "Get in touch",
       },
     ],
     []
@@ -63,10 +47,12 @@ export default function FinalCTASection() {
         bgcolor: "#000",
         color: "#fff",
         overflow: "hidden",
-        py: { xs: 8, sm: 10, md: 6 },
+
+        // Antes era enorme (8/10/6). Esto evita el efecto "pantalla completa"
+        py: { xs: 5, sm: 6, md: 5 },
       }}
     >
-      {/* Background (quiet, premium) */}
+      {/* Background */}
       <Box
         sx={{
           position: "absolute",
@@ -77,7 +63,7 @@ export default function FinalCTASection() {
         }}
       />
 
-      {/* Subtle grain */}
+      {/* Grain */}
       <Box
         sx={{
           position: "absolute",
@@ -100,13 +86,12 @@ export default function FinalCTASection() {
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "1.05fr 0.95fr" },
           alignItems: "center",
-          gap: { xs: 4, md: 6 },
+          gap: { xs: 3, md: 5 }, // ligeramente menos
         }}
       >
-        {/* Left: headline + CTAs */}
+        {/* Left */}
         <Box sx={{ maxWidth: 620 }}>
-          {/* Section label (like your other sections) */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1.6, mb: { xs: 1.25, md: 1.5 } }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1.6, mb: { xs: 1.1, md: 1.3 } }}>
             <Box sx={{ width: 10, height: 10, border: `1px solid ${ORANGE}`, opacity: 0.9 }} />
             <Typography
               sx={{
@@ -124,37 +109,29 @@ export default function FinalCTASection() {
           </Box>
 
           <Typography
-            sx={{
-              fontSize: { xs: "clamp(32px, 6.6vw, 46px)", md: "clamp(40px, 3.6vw, 56px)" },
-              lineHeight: 1.05,
-              fontWeight: 900,
-              letterSpacing: "-0.03em",
-              mb: { xs: 1.25, md: 1.5 },
-            }}
-          >
-            Ready for your next project?
-          </Typography>
+  sx={{
+    fontSize: {
+      xs: "clamp(32px, 6.6vw, 46px)",
+      md: "clamp(38px, 3.2vw, 52px)",
+    },
+    lineHeight: 1.05,
+    fontWeight: 900,
+    letterSpacing: "-0.03em",
 
-          <Typography
-            sx={{
-              color: "rgba(255,255,255,0.76)",
-              fontSize: { xs: 16, sm: 17, md: 18 },
-              lineHeight: 1.75,
-              maxWidth: 54 * 10,
-              mb: { xs: 2.5, md: 3 },
-            }}
-          >
-            Choose the next step that fits you. GRFLEX is built for clean, controlled application and long-term performance.
-          </Typography>
+    mb: { xs: 1.1, md: 1.3 }, // margen externo
+    pb: { xs: 1.6, md: 2.8 }, // padding interno abajo
+  }}
+>
+  Ready for your next project?
+</Typography>
 
-          {/* CTAs */}
+
           <Box
             sx={{
               display: "grid",
               gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
-              gap: { xs: 1.2, md: 1.4 },
-              alignItems: "stretch",
-              mb: { xs: 2.25, md: 2.6 },
+              gap: { xs: 1.1, md: 1.3 },
+              mb: { xs: 2.0, md: 2.2 },
             }}
           >
             {actions.map((a) => (
@@ -174,11 +151,14 @@ export default function FinalCTASection() {
           </Typography>
         </Box>
 
-        {/* Right: Tin hero */}
+        {/* Right: Tin card */}
         <Box
           sx={{
             position: "relative",
-            height: { xs: 360, sm: 420, md: 520 },
+
+            // Antes 360/420/520 (gigante). Esto evita el look de 100% viewport
+            height: { xs: 300, sm: 340, md: 380 },
+
             borderRadius: 3,
             overflow: "hidden",
             border: "1px solid rgba(255,255,255,0.10)",
@@ -201,7 +181,7 @@ export default function FinalCTASection() {
           <Box
             sx={{
               position: "absolute",
-              inset: 18,
+              inset: 22,
               borderRadius: 2.5,
               border: "1px solid rgba(255,255,255,0.10)",
               pointerEvents: "none",
@@ -239,25 +219,24 @@ export default function FinalCTASection() {
               alt="GRFLEX tin"
               draggable={false}
               sx={{
-                width: { xs: "78%", sm: "72%", md: "68%" },
-                maxWidth: 420,
+                width: { xs: "58%", sm: "54%", md: "50%" },
+                maxWidth: 300,
                 height: "auto",
                 filter: "drop-shadow(0 26px 70px rgba(0,0,0,0.70))",
                 userSelect: "none",
               }}
               onError={(e) => {
-                // If image missing, show nothing (silent), so the section still looks clean
                 e.currentTarget.style.display = "none";
               }}
             />
           </Box>
 
-          {/* Quiet caption */}
+          {/* Caption */}
           <Box
             sx={{
               position: "absolute",
-              left: 18,
-              right: 18,
+              left: 22,
+              right: 22,
               bottom: 18,
               display: "flex",
               alignItems: "center",
@@ -290,7 +269,7 @@ function CtaButton({ label, note, href, variant, reducedMotion }) {
         bgcolor: isPrimary ? "rgba(255,106,0,0.92)" : "rgba(255,255,255,0.02)",
         color: isPrimary ? "#000" : "#fff",
         px: { xs: 2.1, md: 2.3 },
-        py: { xs: 1.55, md: 1.7 },
+        py: { xs: 1.45, md: 1.6 },
         display: "flex",
         flexDirection: "column",
         gap: 0.45,
@@ -315,24 +294,11 @@ function CtaButton({ label, note, href, variant, reducedMotion }) {
         },
       }}
     >
-      <Typography
-        sx={{
-          fontWeight: 900,
-          letterSpacing: "-0.01em",
-          fontSize: { xs: 15.5, md: 16 },
-          lineHeight: 1.15,
-        }}
-      >
+      <Typography sx={{ fontWeight: 900, letterSpacing: "-0.01em", fontSize: { xs: 15.5, md: 16 }, lineHeight: 1.15 }}>
         {label}
       </Typography>
 
-      <Typography
-        sx={{
-          fontSize: 12.5,
-          color: isPrimary ? "rgba(0,0,0,0.70)" : "rgba(255,255,255,0.62)",
-          lineHeight: 1.35,
-        }}
-      >
+      <Typography sx={{ fontSize: 12.5, color: isPrimary ? "rgba(0,0,0,0.70)" : "rgba(255,255,255,0.62)", lineHeight: 1.35 }}>
         {note}
       </Typography>
     </Box>

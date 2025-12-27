@@ -30,21 +30,21 @@ export default function WhyGrflexSection() {
     () => [
       {
         eyebrow: "FLEXIBILITY",
-        title: "Real flexibility",
+        title: "Fully Flexible",
         body:
-          "GRFLEX is designed to move, not to crack. It doesn’t resist movement, it follows it. Flexibility is structural, not marketing.",
+          "Roofs aren't rigid, they move GRFlex is fully flexible meaning its designed to move with the roofs , accommodating both expansion contraction and bending.",
         visualType: "flex",
         bullets: [
-          "Moves with the substrate instead of fighting it",
+          "Moves with the roof",
           "Maintains integrity under thermal expansion and vibration",
-          "Flexibility engineered into the system, not added as a claim",
+          "Designed with full flexibility",
         ],
         chips: ["Fully reinforced", "Crack resistant", "Built for movement"],
       },
       {
         eyebrow: "SYSTEM ARCHITECTURE",
-        title: "Seamless continuous system",
-        body: "One continuous system. No weak points. No overlaps. No joints. A single skin across the roof.",
+        title: "One continuous roofing system",
+        body: "One continuous waterproofing system. No weak points. No overlaps. No joints. A single skin across the roof.",
         visualType: "seamless",
         bullets: [
           "Continuous waterproof layer across details and transitions",
@@ -55,7 +55,7 @@ export default function WhyGrflexSection() {
       },
       {
         eyebrow: "REAL WORLD CONDITIONS",
-        title: "Designed for structural movement",
+        title: "Designed for the real world",
         body:
           "Buildings move. Temperature shifts, expansion, vibration, settlement. GRFLEX is built for controlled movement from day one.",
         visualType: "movement",

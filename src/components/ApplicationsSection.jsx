@@ -23,38 +23,23 @@ export default function ApplicationsSection() {
         subline: "Upgrade existing surfaces without starting again.",
         img: "/overlay.png",
       },
-      {
-        key: "balconies",
-        title: "Balconies",
-        subline: "Clean transitions at edges, corners and upstands.",
-        img: "/balcony.png",
-      },
-      {
-        key: "gutters",
-        title: "Gutters",
-        subline: "Adapts to complex shapes without weak points.",
-        img: "/gutter.png",
-      },
     ],
     []
   );
 
   return (
     <Box
-      id="applications"
-      component="section"
-      sx={{
-        position: "relative",
-        bgcolor: "#000",
-        color: "#fff",
-        // full-screen section so the 2×2 grid fits without scrolling
-        minHeight: { xs: "auto", md: "100svh" },
-        display: { xs: "block", md: "flex" },
-        alignItems: { md: "center" },
-        py: { xs: 7, sm: 8, md: 8 },
-        overflow: "hidden",
-      }}
-    >
+    id="applications"
+    component="section"
+    sx={{
+      position: "relative",
+      bgcolor: "#000",
+      color: "#fff",
+      py: { xs: 4, md: 6 },
+      overflow: "hidden",
+    }}
+  >
+  
       {/* Background */}
       <Box
         sx={{
@@ -66,19 +51,17 @@ export default function ApplicationsSection() {
         }}
       />
 
-      <Box
-        sx={{
-          width: "min(1280px, 96%)",
-          mx: "auto",
-          position: "relative",
-          zIndex: 2,
-          // keep everything inside the viewport on desktop
-          height: { md: "calc(100svh - 64px)" },
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: { md: "center" },
-        }}
-      >
+<Box
+  sx={{
+    width: "min(1280px, 96%)",
+    mx: "auto",
+    position: "relative",
+    zIndex: 2,
+    display: "flex",
+    flexDirection: "column",
+  }}
+>
+
         {/* Header (compact on desktop so grid fits) */}
         <Box sx={{ mb: { xs: 3, md: 2.2 } }}>
            <Box sx={{ display: "flex", alignItems: "center", gap: 1.6 }}>
@@ -233,8 +216,8 @@ function ApplicationCard({ item, index, reduceMotion, isMdUp, compact }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            px: 3,
-            pt: 2,
+            px: 2,
+            pt: 1,
           }}
         >
           <Box

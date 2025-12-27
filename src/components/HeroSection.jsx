@@ -20,9 +20,9 @@ export default function HeroSection() {
       {
         eyebrowLeft: "GRFlex",
         eyebrowRight: "Simplicity",
-        titleA: "One tin.",
-        titleB: "One system.",
-        sub: "Clean, controlled application. Engineered for durability.",
+        titleA: "One tin",
+        titleB: "does it all",
+        sub: "Simple range, fast application",
         image: "/TIN2.png",
         imageAlt: "GRFlex tin",
       },
@@ -31,26 +31,26 @@ export default function HeroSection() {
         eyebrowRight: "No primer",
         titleA: "No primer",
         titleB: "required.",
-        sub: "Fewer steps. Less risk. More consistency on site.",
-        image: "/TIN2.png",
+        sub: "Fewer Steps. Less Fuss",
+        image: "/FEL2.png",
         imageAlt: "GRFlex product range",
       },
       {
         eyebrowLeft: "GRFlex",
         eyebrowRight: "One kit",
-        titleA: "Everything",
-        titleB: "as one system.",
-        sub: "Resin, activator and reinforcement working together.",
-        image: "/TIN2.png",
+        titleA: "3 parts",
+        titleB: "1 system.",
+        sub: "Waterproof, activator and matting.",
+        image: "/KIT.png",
         imageAlt: "GRFlex kit",
       },
       {
         eyebrowLeft: "GRFlex",
         eyebrowRight: "Performance",
-        titleA: "Flexible.",
-        titleB: "Continuous.",
-        sub: "Moves with the substrate without cracking or joint failures.",
-        image: "/TIN2.png",
+        titleA: "Fully",
+        titleB: "Flexible.",
+        sub: "Tough and flexible moving with the roof",
+        image: "/FLEX.png",
         imageAlt: "GRFlex performance",
       },
     ],
@@ -227,20 +227,30 @@ export default function HeroSection() {
                 }}
               >
                 <Typography
-                  sx={{
-                    fontWeight: 900,
-                    letterSpacing: "-0.03em",
-                    lineHeight: 0.98,
-                    fontSize: { xs: "clamp(38px, 9.2vw, 70px)", md: "clamp(50px, 5.0vw, 76px)" },
-                    mb: { xs: 1.15, md: 1.35 },
-                    maxWidth: 760,
-                  }}
-                >
-                  {slide.titleA}{" "}
-                  <Box component="span" sx={{ color: ORANGE }}>
-                    {slide.titleB}
-                  </Box>
-                </Typography>
+  sx={{
+    fontWeight: 900,
+    letterSpacing: "-0.03em",
+    lineHeight: 0.98,
+    fontSize: {
+      xs: "clamp(38px, 9.2vw, 70px)",
+      md: "clamp(50px, 5.0vw, 76px)",
+    },
+    mb: { xs: 1.15, md: 1.35 },
+    maxWidth: 760,
+  }}
+>
+  {slide.titleA}
+  <Box
+    component="span"
+    sx={{
+      display: "block", // ⬅️ fuerza nueva línea
+      color: ORANGE,
+    }}
+  >
+    {slide.titleB}
+  </Box>
+</Typography>
+
 
                 <Typography
                   sx={{
@@ -255,22 +265,25 @@ export default function HeroSection() {
                 </Typography>
 
                 <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <Button
-                    variant="contained"
-                    disableElevation
-                    sx={{
-                      bgcolor: ORANGE,
-                      color: "#000",
-                      fontWeight: 900,
-                      px: 3.0,
-                      py: 1.15,
-                      borderRadius: 999,
-                      textTransform: "none",
-                      "&:hover": { bgcolor: ORANGE, filter: "brightness(1.05)" },
-                    }}
-                  >
-                    Get GRFlex
-                  </Button>
+                <Button
+  component="a"
+  href="/find-a-supplier"
+  variant="contained"
+  disableElevation
+  sx={{
+    bgcolor: ORANGE,
+    color: "#000",
+    fontWeight: 900,
+    px: 3.0,
+    py: 1.15,
+    borderRadius: 999,
+    textTransform: "none",
+    "&:hover": { bgcolor: ORANGE, filter: "brightness(1.05)" },
+  }}
+>
+  Get GRFlex
+</Button>
+
 
                   <Typography sx={{ color: "rgba(255,255,255,0.55)", fontSize: 13.25 }}>
                     Trusted system. Straightforward on site.

@@ -329,7 +329,8 @@ export default function CalculatorSection() {
               bgcolor: "rgba(255,255,255,0.02)",
               backdropFilter: "blur(6px)",
               borderRadius: 3,
-              p: { xs: 3, sm: 3.5, md: 4 },
+              px: { xs: 3, sm: 3.5, md: 4 },
+py: 2,
               boxShadow: "0 40px 120px rgba(0,0,0,0.65)",
               height: "fit-content",
               position: "relative",
@@ -370,84 +371,105 @@ export default function CalculatorSection() {
                 {hasInput ? "Based on the roof size provided, you will need approximately:" : "Enter a roof size to see an estimate."}
               </Typography>
 
-              {/* Big summary */}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "baseline",
-                  gap: 1.5,
-                  mb: { xs: 2.5, md: 3 },
-                }}
-              >
-                {hasInput ? (
-                  <>
-                    <Typography sx={{ fontSize: { xs: 22, sm: 26, md: 30 }, lineHeight: 1.25, color: "#fff", fontWeight: 900 }}>
-                      {tinsNeeded} Tin{tinsNeeded === 1 ? "" : "s"}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 18, sm: 20, md: 22 },
-                        lineHeight: 1.25,
-                        color: "rgba(255,255,255,0.88)",
-                        fontWeight: 800,
-                      }}
-                    >
-                      of GRFlex Waterproof
-                    </Typography>
+            {/* Big summary (list style) */}
+<Box sx={{ mb: { xs: 2.5, md: 3 } }}>
+  {hasInput ? (
+    <Box
+      component="ul"
+      sx={{
+        listStyle: "none",
+        p: 0,
+        m: 0,
+        display: "grid",
+        gap: { xs: 1.1, sm: 1.2 },
+      }}
+    >
+      {/* 1) GRFlex Waterproof */}
+      <Box component="li" sx={{ display: "flex", alignItems: "baseline", flexWrap: "wrap", gap: 1 }}>
+        <Typography
+          sx={{
+            fontSize: { xs: 18, sm: 20, md: 22 },
+            lineHeight: 1.25,
+            color: "#fff",
+            fontWeight: 900,
+          }}
+        >
+          {tinsNeeded} Tin{tinsNeeded === 1 ? "" : "s"}
+        </Typography>
 
-                    <Typography sx={{ fontSize: { xs: 18, sm: 20, md: 22 }, color: ORANGE, fontWeight: 900, mx: 0.5 }}>
-                      +
-                    </Typography>
+        <Typography
+          sx={{
+            fontSize: { xs: 18, sm: 20, md: 22 },
+            lineHeight: 1.25,
+            color: ORANGE,
+            fontWeight: 900,
+          }}
+        >
+          GRFlex Waterproof
+        </Typography>
+      </Box>
 
-                    <Typography sx={{ fontSize: { xs: 22, sm: 26, md: 30 }, lineHeight: 1.25, color: "#fff", fontWeight: 900 }}>
-                      {activatorBottles} Bottle{activatorBottles === 1 ? "" : "s"}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 18, sm: 20, md: 22 },
-                        lineHeight: 1.25,
-                        color: "rgba(255,255,255,0.88)",
-                        fontWeight: 800,
-                      }}
-                    >
-                      of Activator
-                    </Typography>
+      {/* 2) Activator */}
+      <Box component="li" sx={{ display: "flex", alignItems: "baseline", flexWrap: "wrap", gap: 1 }}>
+        <Typography
+          sx={{
+            fontSize: { xs: 18, sm: 20, md: 22 },
+            lineHeight: 1.25,
+            color: "#fff",
+            fontWeight: 900,
+          }}
+        >
+          {activatorBottles} Bottle{activatorBottles === 1 ? "" : "s"}
+        </Typography>
 
-                    <Typography sx={{ fontSize: { xs: 18, sm: 20, md: 22 }, color: ORANGE, fontWeight: 900, mx: 0.5 }}>
-                      +
-                    </Typography>
+        <Typography
+          sx={{
+            fontSize: { xs: 18, sm: 20, md: 22 },
+            lineHeight: 1.25,
+            color: ORANGE,
+            fontWeight: 900,
+          }}
+        >
+          Activator
+        </Typography>
+      </Box>
 
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 22, sm: 26, md: 30 },
-                        lineHeight: 1.25,
-                        color: "#fff",
-                        fontWeight: 900,
-                      }}
-                    >
-                      {(() => {
-                        const total = (mattingRolls.long || 0) + (mattingRolls.short || 0);
-                        return `${total > 0 ? total : 1} Roll${total === 1 ? "" : "s"}`;
-                      })()}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 18, sm: 20, md: 22 },
-                        lineHeight: 1.25,
-                        color: "rgba(255,255,255,0.88)",
-                        fontWeight: 800,
-                      }}
-                    >
-                      of Reinforcement Matting
-                    </Typography>
-                  </>
-                ) : (
-                  <Typography sx={{ fontSize: { xs: 16, sm: 18, md: 18 }, color: "rgba(255,255,255,0.7)", fontWeight: 800 }}>
-                    Enter a roof size to see an estimate.
-                  </Typography>
-                )}
-              </Box>
+      {/* 3) Reinforcement Matting */}
+      <Box component="li" sx={{ display: "flex", alignItems: "baseline", flexWrap: "wrap", gap: 1 }}>
+        <Typography
+          sx={{
+            fontSize: { xs: 18, sm: 20, md: 22 },
+            lineHeight: 1.25,
+            color: "#fff",
+            fontWeight: 900,
+          }}
+        >
+          {(() => {
+            const total = (mattingRolls.long || 0) + (mattingRolls.short || 0);
+            const safeTotal = total > 0 ? total : 1;
+            return `${safeTotal} Roll${safeTotal === 1 ? "" : "s"}`;
+          })()}
+        </Typography>
+
+        <Typography
+          sx={{
+            fontSize: { xs: 18, sm: 20, md: 22 },
+            lineHeight: 1.25,
+            color: ORANGE,
+            fontWeight: 900,
+          }}
+        >
+          Reinforcement Matting
+        </Typography>
+      </Box>
+    </Box>
+  ) : (
+    <Typography sx={{ fontSize: { xs: 16, sm: 18, md: 18 }, color: "rgba(255,255,255,0.7)", fontWeight: 800 }}>
+      Enter a roof size to see an estimate.
+    </Typography>
+  )}
+</Box>
+
 
               <Divider sx={{ borderColor: "rgba(255,255,255,0.10)", mb: 2.5 }} />
 

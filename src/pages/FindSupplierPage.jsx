@@ -278,7 +278,7 @@ export default function FindSupplierPage() {
       fontSize: { xs: 18, sm: 20 },
     }}
   >
-    Find a Supplier
+    Where to buy GRFlex Waterproof
   </Typography>
 </Box>
 
@@ -311,7 +311,7 @@ export default function FindSupplierPage() {
             mb: { xs: 2.5, md: 3 },
           }}
         >
-          Enter a UK postcode, town, or address to see nearby suppliers. Results are ordered by proximity.
+          Enter a UK postcode, town, or address to see nearby distribuitors. Results are ordered by proximity.
         </Typography>
 
         {/* Become supplier form (collapse) */}
